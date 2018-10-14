@@ -8,24 +8,15 @@ namespace BankAccountLib
     /// </summary>
     public class BankAccount
     {
-        private string _customerName;
-        private double _balance;
         private bool _frozen = false;
 
-        public string CustomerName
-        {
-            get { return _customerName; }
-        }
-
-        public double Balance
-        {
-            get { return _balance; }
-        }
+        public string CustomerName { get; }
+        public double Balance { get; private set; }
 
         public BankAccount(string customerName, double balance)
         {
-            _customerName = customerName;
-            _balance = balance;
+            CustomerName = customerName;
+            Balance = balance;
         }
 
         public void Debit(double amount)
@@ -35,7 +26,7 @@ namespace BankAccountLib
                 throw new Exception("Account frozen");
             }
 
-            if (amount > _balance)
+            if (amount > Balance)
             {
                 throw new ArgumentOutOfRangeException("amount");
             }
@@ -45,7 +36,7 @@ namespace BankAccountLib
                 throw new ArgumentOutOfRangeException("amount");
             }
 
-            _balance += amount; // intentionally incorrect code
+            Balance += amount; // intentionally incorrect code
         }
 
         public void Credit(double amount)
@@ -60,7 +51,7 @@ namespace BankAccountLib
                 throw new ArgumentOutOfRangeException("amount");
             }
 
-            _balance += amount;
+            Balance += amount;
         }
 
         private void FreezeAccount()
