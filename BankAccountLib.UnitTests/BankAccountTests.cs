@@ -66,5 +66,22 @@ namespace BankAccountLib.UnitTests
 
             // Assert
         }
+
+        [TestMethod]
+        [DataRow(1000, 100, 1100)]
+        [DataRow(1000, 200, 1200)]
+        [DataRow(1000, 300, 1300)]
+        [DataTestMethod]
+        public void CreditShouldSetBalanceTest(double balance, double amount, double expected)
+        {
+            // Arrange
+            var sut = new BankAccount("Adam", balance);
+
+            // Act
+            sut.Credit(amount);
+
+            // Assert
+            Assert.AreEqual(expected, sut.Balance);
+        }
     }
 }
