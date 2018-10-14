@@ -67,7 +67,6 @@ namespace BankAccountLib.UnitTests
             // Assert
         }
 
-        [TestMethod]
         [DataRow(1000, 100, 1100)]
         [DataRow(1000, 200, 1200)]
         [DataRow(1000, 300, 1300)]

@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1238BD19
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountLib.UnitTests", "BankAccountLib.UnitTests\BankAccountLib.UnitTests.csproj", "{A5F9280C-6B98-4674-B1A9-404FF0CEAF81}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mstests", "mstests", "{3AFF54EC-0A53-41E9-BAC6-7ADD7ACA34C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,7 +30,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A5F9280C-6B98-4674-B1A9-404FF0CEAF81} = {1238BD19-F6E7-48D9-9D51-597454D7C242}
+		{A5F9280C-6B98-4674-B1A9-404FF0CEAF81} = {3AFF54EC-0A53-41E9-BAC6-7ADD7ACA34C0}
+		{3AFF54EC-0A53-41E9-BAC6-7ADD7ACA34C0} = {1238BD19-F6E7-48D9-9D51-597454D7C242}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6C0193B-58A9-44E2-8BD5-83FF3D54A9C4}
