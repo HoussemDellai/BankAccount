@@ -2,21 +2,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace BankAccountLib.UnitTests
+namespace BankAccountLib.MsTest.UnitTests
 {
     [TestClass]
     public class BankAccountTests
     {
-        [TestInitialize]
-        private void RunBeforeTest()
-        {
-        }
-
-        [TestCleanup]
-        private void RunAfterTest()
-        {
-        }
-
         [TestMethod]
         [TestCategory("Credit")]
         public void CreditShouldSetBalanceTo1100Test()
@@ -119,6 +109,16 @@ namespace BankAccountLib.UnitTests
             yield return new object[] { 1, 1, 2 };
             yield return new object[] { 12, 30, 42 };
             yield return new object[] { 14, 1, 15 };
+        }
+
+        [TestInitialize]
+        public void RunBeforeTest()
+        {
+        }
+
+        [TestCleanup]
+        public void RunAfterTest()
+        {
         }
     }
 }
