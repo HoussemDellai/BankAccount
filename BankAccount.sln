@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1238BD19
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountLib.MsTest.UnitTests", "BankAccountLib.MsTest.UnitTests\BankAccountLib.MsTest.UnitTests.csproj", "{FAC9596A-C810-4B12-A16B-040B9107C708}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountLib.Xunit.UnitTests", "BankAccountLib.Xunit.UnitTests\BankAccountLib.Xunit.UnitTests.csproj", "{205615DB-D1CA-44C2-A93A-1D687063514A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{FAC9596A-C810-4B12-A16B-040B9107C708}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAC9596A-C810-4B12-A16B-040B9107C708}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAC9596A-C810-4B12-A16B-040B9107C708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{205615DB-D1CA-44C2-A93A-1D687063514A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205615DB-D1CA-44C2-A93A-1D687063514A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205615DB-D1CA-44C2-A93A-1D687063514A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205615DB-D1CA-44C2-A93A-1D687063514A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FAC9596A-C810-4B12-A16B-040B9107C708} = {1238BD19-F6E7-48D9-9D51-597454D7C242}
+		{205615DB-D1CA-44C2-A93A-1D687063514A} = {1238BD19-F6E7-48D9-9D51-597454D7C242}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6C0193B-58A9-44E2-8BD5-83FF3D54A9C4}
