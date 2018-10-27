@@ -1,14 +1,13 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System;
 using System.Collections.Generic;
 
-namespace BankAccountLib.MsTest.UnitTests
+namespace BankAccountLib.Xunit.UnitTests
 {
-    [TestClass]
     public class BankAccountTests
     {
-        [TestMethod]
-        [TestCategory("Credit")]
+        [Fact]
+        [Trait("Method", "Credit")]
         public void Credit_ValidAmount_IncrementBalance()
         {
             // Arrange
@@ -20,11 +19,11 @@ namespace BankAccountLib.MsTest.UnitTests
             var actual = sut.Balance;
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [TestMethod]
-        [TestCategory("Debit")]
+        [Fact]
+        [Trait("Method", "Debit")]
         public void Debit_ValidAmount_DecrementBalance()
         {
             // Arrange
@@ -35,15 +34,15 @@ namespace BankAccountLib.MsTest.UnitTests
             sut.Debit(100);
 
             // Assert
-            Assert.AreEqual(expected, sut.Balance);
+            Assert.Equal(expected, sut.Balance);
         }
 
         /// <summary>
         /// Should the code just return when the Amount = 0 ?
         /// It depends on the use case.
         /// </summary>
-        [TestMethod]
-        [TestCategory("Credit")]
+        [Fact]
+        [Trait("Method", "Credit")]
         public void Credit_AmountZero_NotChangeBalance()
         {
             // Arrange
@@ -55,11 +54,11 @@ namespace BankAccountLib.MsTest.UnitTests
             var actual = sut.Balance;
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [TestMethod]
-        [TestCategory("Credit")]
+        [Fact]
+        [Trait("Method", "Credit")]
         public void Credit_MaxAmount_ThrowsException()
         {
             // Arrange
@@ -67,13 +66,12 @@ namespace BankAccountLib.MsTest.UnitTests
 
             // Act
             // Assert
-            Assert.ThrowsException<ArgumentOutOfRangeException>(
+            Assert.Throws<ArgumentOutOfRangeException>(
                 () => sut.Credit(int.MaxValue));
         }
 
-        [TestMethod]
-        [Ignore("Bad test case to catch Exception inside the test method")]
-        [TestCategory("Debit")]
+        [Fact(Skip = "Bad test case to catch Exception inside the test")]
+        [Trait("Method", "Debit")]
         public void Debit_AmountBiggerThanBalance_ThrowsException_()
         {
             // Arrange
@@ -89,32 +87,35 @@ namespace BankAccountLib.MsTest.UnitTests
             catch (ArgumentOutOfRangeException e)
             {
                 actual = sut.Balance;
+
                 // Assert
-                Assert.AreEqual("amount", e.ParamName);
-                Assert.AreEqual(expected, actual);
+                Assert.Equal("amount", e.ParamName);
+                Assert.Equal(expected, actual);
             }
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        [TestCategory("Debit")]
+        [Fact]
+        [Trait("Method", "Debit")]
         public void Debit_AmountBiggerThanBalance_ThrowsException()
         {
             // Arrange
             var sut = new BankAccount("Adam", 1000);
+            var expected = 1000;
 
             // Act
-            sut.Debit(2000);
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () => sut.Debit(2000));
+            var actual = sut.Balance;
 
             // Assert
-            // the attribute [ExpectedException(typeof(ArgumentOutOfRangeException))]
+            Assert.Equal(expected, actual);
         }
 
-        [DataRow(1000, 100, 1100)]
-        [DataRow(1000, 200, 1200)]
-        [DataRow(1000, 300, 1300)]
-        [DataTestMethod]
-        [TestCategory("Credit")]
+        [InlineData(1000, 100, 1100)]
+        [InlineData(1000, 200, 1200)]
+        [InlineData(1000, 300, 1300)]
+        [Theory]
+        [Trait("Method", "Credit")]
         public void Credit_ValidAmount_IncrementBalance_DataRow(double balance, double amount, double expected)
         {
             // Arrange
@@ -125,13 +126,13 @@ namespace BankAccountLib.MsTest.UnitTests
             var actual = sut.Balance;
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
-        [TestCategory("Credit")]
-        public void Credit_ValidAmount_IncrementBalance_DynamicData(double balance, double amount, double expected)
+        [MemberData(nameof(GetData))]
+        [Theory]
+        [Trait("Method", "Credit")]
+        public void Credit_ValidAmount_IncrementBalance_MemberData(double balance, double amount, double expected)
         {
             // Arrange
             var sut = new BankAccount("Adam", balance);
@@ -141,10 +142,10 @@ namespace BankAccountLib.MsTest.UnitTests
             var actual = sut.Balance;
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        private static IEnumerable<object[]> GetData()
+        public static IEnumerable<object[]> GetData()
         {
             return new List<object[]>
             {
@@ -154,13 +155,10 @@ namespace BankAccountLib.MsTest.UnitTests
             };
         }
 
-        [TestInitialize]
-        public void RunBeforeTest()
-        {
-        }
-
-        [TestCleanup]
-        public void RunAfterTest()
+        /// <summary>
+        /// The equivalent to [TestInitialize] is the constructor.
+        /// </summary>
+        public BankAccountTests()
         {
         }
     }
