@@ -57,19 +57,6 @@ namespace BankAccountLib.Xunit.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        [Trait("Method", "Credit")]
-        public void Credit_MaxAmount_ThrowsException()
-        {
-            // Arrange
-            var sut = new BankAccount("Adam", 1000);
-
-            // Act
-            // Assert
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => sut.Credit(int.MaxValue));
-        }
-
         [Fact(Skip = "Bad test case to catch Exception inside the test")]
         [Trait("Method", "Debit")]
         public void Debit_AmountBiggerThanBalance_ThrowsException_()
@@ -92,6 +79,19 @@ namespace BankAccountLib.Xunit.UnitTests
                 Assert.Equal("amount", e.ParamName);
                 Assert.Equal(expected, actual);
             }
+        }
+
+        [Fact]
+        [Trait("Method", "Credit")]
+        public void Credit_MaxAmount_ThrowsException()
+        {
+            // Arrange
+            var sut = new BankAccount("Adam", 1000);
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => sut.Credit(int.MaxValue));
         }
 
         [Fact]

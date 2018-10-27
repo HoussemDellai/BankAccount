@@ -1,14 +1,14 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace BankAccountLib.MsTest.UnitTests
+namespace BankAccountLib.Nunit.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class BankAccountTests
     {
-        [TestMethod]
-        [TestCategory("Credit")]
+        [Test]
+        [Category("Credit")]
         public void Credit_ValidAmount_IncrementBalance()
         {
             // Arrange
@@ -23,8 +23,8 @@ namespace BankAccountLib.MsTest.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        [TestCategory("Debit")]
+        [Test]
+        [Category("Debit")]
         public void Debit_ValidAmount_DecrementBalance()
         {
             // Arrange
@@ -42,8 +42,8 @@ namespace BankAccountLib.MsTest.UnitTests
         /// Should the code just return when the Amount = 0 ?
         /// It depends on the use case.
         /// </summary>
-        [TestMethod]
-        [TestCategory("Credit")]
+        [Test]
+        [Category("Credit")]
         public void Credit_AmountZero_NotChangeBalance()
         {
             // Arrange
@@ -58,9 +58,22 @@ namespace BankAccountLib.MsTest.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
+        [Category("Credit")]
+        public void Credit_MaxAmount_ThrowsException()
+        {
+            // Arrange
+            var sut = new BankAccount("Adam", 1000);
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => sut.Credit(int.MaxValue));
+        }
+
+        [Test]
         [Ignore("Bad test case to catch Exception inside the test method")]
-        [TestCategory("Debit")]
+        [Category("Debit")]
         public void Debit_AmountBiggerThanBalance_ThrowsException_()
         {
             // Arrange
@@ -82,22 +95,11 @@ namespace BankAccountLib.MsTest.UnitTests
             }
         }
 
-        [TestMethod]
-        [TestCategory("Credit")]
-        public void Credit_MaxAmount_ThrowsException()
-        {
-            // Arrange
-            var sut = new BankAccount("Adam", 1000);
-
-            // Act
-            // Assert
-            Assert.ThrowsException<ArgumentOutOfRangeException>(
-                () => sut.Credit(int.MaxValue));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        [TestCategory("Debit")]
+        /// <summary>
+        /// No equivalent to [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        /// </summary>
+        [Test]
+        [Category("Debit")]
         public void Debit_AmountBiggerThanBalance_ThrowsException()
         {
             // Arrange
@@ -107,15 +109,16 @@ namespace BankAccountLib.MsTest.UnitTests
             sut.Debit(2000);
 
             // Assert
-            // the attribute [ExpectedException(typeof(ArgumentOutOfRangeException))]
+            Assert.Throws<ArgumentOutOfRangeException>(
+                new TestDelegate(() => sut.Debit(2000)));
         }
 
-        [DataRow(1000, 100, 1100)]
-        [DataRow(1000, 200, 1200)]
-        [DataRow(1000, 300, 1300)]
-        [DataTestMethod]
-        [TestCategory("Credit")]
-        public void Credit_ValidAmount_IncrementBalance_DataRow(double balance, double amount, double expected)
+        [TestCase(1000, 100, 1100)]
+        [TestCase(1000, 200, 1200)]
+        [TestCase(1000, 300, 1300)]
+        [Test]
+        [Category("Credit")]
+        public void Credit_ValidAmount_IncrementBalance_TestCase(double balance, double amount, double expected)
         {
             // Arrange
             var sut = new BankAccount("Adam", balance);
@@ -128,10 +131,10 @@ namespace BankAccountLib.MsTest.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
-        [TestCategory("Credit")]
-        public void Credit_ValidAmount_IncrementBalance_DynamicData(double balance, double amount, double expected)
+        [Test]
+        [TestCaseSource(nameof(GetData))]
+        [Category("Credit")]
+        public void Credit_ValidAmount_IncrementBalance_TestCaseSource(double balance, double amount, double expected)
         {
             // Arrange
             var sut = new BankAccount("Adam", balance);
@@ -154,13 +157,23 @@ namespace BankAccountLib.MsTest.UnitTests
             };
         }
 
-        [TestInitialize]
+        [SetUp]
         public void RunBeforeTest()
         {
         }
 
-        [TestCleanup]
+        [TearDown]
         public void RunAfterTest()
+        {
+        }
+
+        [OneTimeSetUp]
+        public void RunOnceBeforeTest()
+        {
+        }
+
+        [OneTimeTearDown]
+        public void RunOnceAfterTest()
         {
         }
     }
