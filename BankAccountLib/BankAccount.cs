@@ -51,7 +51,7 @@ namespace BankAccountLib
                 throw new ArgumentOutOfRangeException("amount");
             }
 
-            Balance += amount; // intentionally incorrect code
+            Balance -= amount; // intentionally incorrect code
         }
 
         private void FreezeAccount()

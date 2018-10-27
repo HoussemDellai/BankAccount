@@ -106,11 +106,9 @@ namespace BankAccountLib.Nunit.UnitTests
             var sut = new BankAccount("Adam", 1000);
 
             // Act
-            sut.Debit(2000);
-
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(
-                new TestDelegate(() => sut.Debit(2000)));
+                () => sut.Debit(2000));
         }
 
         [TestCase(1000, 100, 1100)]
