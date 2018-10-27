@@ -32,9 +32,10 @@ namespace BankAccountLib.Xunit.UnitTests
 
             // Act
             sut.Debit(100);
+            var actual = sut.Balance;
 
             // Assert
-            Assert.Equal(expected, sut.Balance);
+            Assert.Equal(expected, actual);
         }
 
         /// <summary>
@@ -154,7 +155,7 @@ namespace BankAccountLib.Xunit.UnitTests
                 new object[] { 14, 1, 15 }
             };
         }
-
+        
         /// <summary>
         /// The equivalent to [TestInitialize] is the constructor.
         /// </summary>

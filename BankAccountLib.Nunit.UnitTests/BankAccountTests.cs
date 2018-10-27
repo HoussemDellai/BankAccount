@@ -33,9 +33,12 @@ namespace BankAccountLib.Nunit.UnitTests
 
             // Act
             sut.Debit(100);
+            var actual = sut.Balance;
 
             // Assert
-            Assert.AreEqual(expected, sut.Balance, "Check Debit method impl");
+            Assert.That(actual, Is.EqualTo(expected));
+            // the same as :
+            // Assert.AreEqual(expected, actual, "Check Debit method impl");
         }
 
         /// <summary>
