@@ -19,6 +19,21 @@ namespace BankAccountLib
             Balance = balance;
         }
 
+        public void Credit(double amount)
+        {
+            if (_frozen)
+            {
+                throw new Exception("Account frozen");
+            }
+
+            if (amount < 0 || amount >= int.MaxValue - Balance)
+            {
+                throw new ArgumentOutOfRangeException("amount");
+            }
+
+            Balance += amount;
+        }
+
         public void Debit(double amount)
         {
             if (_frozen)
@@ -36,22 +51,7 @@ namespace BankAccountLib
                 throw new ArgumentOutOfRangeException("amount");
             }
 
-            Balance += amount; // intentionally incorrect code
-        }
-
-        public void Credit(double amount)
-        {
-            if (_frozen)
-            {
-                throw new Exception("Account frozen");
-            }
-
-            if (amount < 0)
-            {
-                throw new ArgumentOutOfRangeException("amount");
-            }
-
-            Balance += amount;
+            Balance -= amount; // intentionally incorrect code
         }
 
         private void FreezeAccount()
