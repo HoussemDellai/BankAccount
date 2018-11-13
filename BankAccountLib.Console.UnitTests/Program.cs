@@ -22,7 +22,7 @@
             if (expected == sut.Balance)
                 System.Console.WriteLine(nameof(Credit_ValidAmount_IncrementBalance) + " : Passed");
             else
-                System.Console.WriteLine(nameof(Credit_ValidAmount_IncrementBalance) + " : Faled");
+                System.Console.WriteLine(nameof(Credit_ValidAmount_IncrementBalance) + " : Failed");
         }
     }
 }
