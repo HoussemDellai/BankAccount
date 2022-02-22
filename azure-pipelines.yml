@@ -23,6 +23,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '2.1.x'
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
