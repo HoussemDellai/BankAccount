@@ -1,4 +1,4 @@
-# BankAccount
+# Bank Account tests
 Demoing unit tests using Visual Studio
 
 Build Status
